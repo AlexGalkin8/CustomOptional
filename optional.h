@@ -4,7 +4,7 @@
 #include <utility>
 #include <new>
 
-// Исключение этого типа должно генерироватся при обращении к пустому optional
+// РСЃРєР»СЋС‡РµРЅРёРµ СЌС‚РѕРіРѕ С‚РёРїР° РґРѕР»Р¶РЅРѕ РіРµРЅРµСЂРёСЂРѕРІР°С‚СЃСЏ РїСЂРё РѕР±СЂР°С‰РµРЅРёРё Рє РїСѓСЃС‚РѕРјСѓ optional
 class BadOptionalAccess : public std::exception
 {
 public:
@@ -24,7 +24,7 @@ public:
 
     Optional(const T& value)
     {
-        if (is_initialized_) // Если память была инициализирована
+        if (is_initialized_) // Р•СЃР»Рё РїР°РјСЏС‚СЊ Р±С‹Р»Р° РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅР°
         {
             *value_ = value;
         }
@@ -85,7 +85,7 @@ public:
 
     Optional& operator=(const T& value)
     {
-        if (is_initialized_) // Если память была инициализирована
+        if (is_initialized_) // Р•СЃР»Рё РїР°РјСЏС‚СЊ Р±С‹Р»Р° РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅР°
         {
             *value_ = value;
         }
@@ -182,7 +182,7 @@ public:
         return std::move(*value_);
     }
 
-    // Метод Value() генерирует исключение BadOptionalAccess, если Optional пуст
+    // РњРµС‚РѕРґ Value() РіРµРЅРµСЂРёСЂСѓРµС‚ РёСЃРєР»СЋС‡РµРЅРёРµ BadOptionalAccess, РµСЃР»Рё Optional РїСѓСЃС‚
     T& Value() &
     {
         if (!is_initialized_)
@@ -239,7 +239,7 @@ public:
     }
 
 private:
-    // alignas нужен для правильного выравнивания блока памяти
+    // alignas РЅСѓР¶РµРЅ РґР»СЏ РїСЂР°РІРёР»СЊРЅРѕРіРѕ РІС‹СЂР°РІРЅРёРІР°РЅРёСЏ Р±Р»РѕРєР° РїР°РјСЏС‚Рё
     alignas(T) char data_[sizeof(T)];
     T* value_ = nullptr;
     bool is_initialized_ = false;
